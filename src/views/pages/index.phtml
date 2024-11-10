@@ -1,0 +1,83 @@
+<?php
+
+/** @var array $categories */
+/** @var array $products */
+
+?>
+<div id="content-wrapper" class="row">
+    <div class="col-md-3">
+        <div class="list-group categories-wrapper">
+            <?php foreach ($categories as $item): ?>
+                <?php $currentCategory = $_GET['category'] && $_GET['category'] == $item['id']; ?>
+                <a href="<?= getUrl(['category' => $item['id']]) ?>" class="list-group-item category-item d-flex justify-content-between align-items-center <?= $currentCategory ? 'active' : '' ?>">
+                    <?= $item['name'] ?>
+                    <span class="badge bg-primary rounded-pill">
+                        <?= $item['products_count'] ?>
+                    </span>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <div class="col-md-9 mt-3 mt-md-0">
+        <div class="product-list-header row mb-3">
+            <div class="col-md-6 d-flex align-items-center">
+                Total Items <?= count($products) ?>
+            </div>
+            <div class="col-md-6 d-flex align-items-center gap-3 justify-content-md-end">
+                <label for="sorting">
+                    Sort by
+                </label>
+                <select id="sorting" class="form-select" aria-label="Sorting">
+                    <option selected>Choose sorting</option>
+                    <option value="price">Lowest price</option>
+                    <option value="alphabetic">Alphabetic</option>
+                    <option value="newest">Newest</option>
+                </select>
+            </div>
+        </div>
+        <ul class="product-list mb-3">
+            <?php foreach ($products as $product): ?>
+                <li class="product-list-item">
+                    <div class="card">
+                        <img class="card-img-top" src="https://picsum.photos/300/150" width="300px" height="150px" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <?= $product['name'] ?>
+                            </h5>
+                            <p class="card-text">
+                                <?= $product['description'] ?>
+                            </p>
+                            <p class="price mb-3">
+                                <span class="fw-bold">$<?= $product['price'] ?></span> <br>
+                                <small class="mb-3">Created at <?= $product['created_at'] ?></small>
+                            </p>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-<?= $product['id'] ?>">Add to Card</button>
+                        </div>
+                        <div class="modal fade" id="modal-<?= $product['id'] ?>" tabindex="-1" aria-labelledby="modalLabel-<?= $product['id'] ?>" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalLabel-<?= $product['id'] ?>"><?= $product['name'] ?></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="card-text">
+                                            <?= $product['description'] ?>
+                                        </p>
+                                        <p class="price">
+                                            <span class="fw-bold">$<?= $product['price'] ?></span> <br>
+                                            <small class="mb-3">Created at <?= $product['created_at'] ?></small>
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</div>
