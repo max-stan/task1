@@ -53,13 +53,13 @@ class Base
 
         $products = $this->productRepository->getAllByCategoryId((int)$currentCategoryId, $sorting);
 
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            include_once ROOT_PATH . '/src/views/base/header.phtml';
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            echo json_encode($products);
+            die();
         }
-        include_once ROOT_PATH . '/src/views/pages/index.phtml';
 
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            include_once ROOT_PATH . '/src/views/base/footer.phtml';
-        }
+        include_once ROOT_PATH . '/src/views/base/header.phtml';
+        include_once ROOT_PATH . '/src/views/pages/index.phtml';
+        include_once ROOT_PATH . '/src/views/base/footer.phtml';
     }
 }
