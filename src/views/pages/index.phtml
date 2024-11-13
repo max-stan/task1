@@ -20,7 +20,7 @@
     </div>
     <div class="col-md-9 mt-3 mt-md-0">
         <div class="product-list-header row mb-3">
-            <div class="col-md-6 d-flex align-items-center">
+            <div id="items-counter" class="col-md-6 d-flex align-items-center">
                 Total Items <?= count($products) ?>
             </div>
             <div class="col-md-6 d-flex align-items-center gap-3 justify-content-md-end">
@@ -28,7 +28,7 @@
                     Sort by
                 </label>
                 <select id="sorting" class="form-select" aria-label="Sorting">
-                    <option selected>Choose sorting</option>
+                    <option selected disabled>Choose sorting</option>
                     <option value="price">Lowest price</option>
                     <option value="alphabetic">Alphabetic</option>
                     <option value="newest">Newest</option>

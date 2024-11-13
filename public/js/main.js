@@ -73,6 +73,7 @@ async function onCategoryItemClick(e) {
     const elements = data.map(item => getProductItemHtml(item));
 
     document.querySelector('.product-list').innerHTML = elements.join('');
+    document.querySelector('#items-counter').textContent = `Total Items ${elements.length}`;
 }
 
 async function onSortingClick() {
